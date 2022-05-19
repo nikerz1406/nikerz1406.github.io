@@ -1,0 +1,47 @@
+body{
+    position: relative;
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+    /* background:rgb(220,237,200); */
+}
+#inHeader,#inFooter{
+    position: relative;
+    width: 100%;
+  height:50px ;
+    /* background:rgb(179,229,252); */
+    overflow: hidden;
+}
+#loadEffect{
+    margin: 0;
+    padding: 0;
+}
+#inCenter{
+    position: relative;
+    width: 100%;
+    min-height:512px ;
+    overflow: hidden;
+}
+#inMain{
+    display:none;
+}
+#loading{
+    position:fixed;
+    height:100vh;
+    width: 100%;
+}
+#alert-mobile-screen{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+#alert-mobile-screen h1{
+    padding:1rem;
+}
+@media only screen and (max-width: 393px) {
+
+    #alert-mobile-screen{
+        display:block;
+    }
+  
+  }
