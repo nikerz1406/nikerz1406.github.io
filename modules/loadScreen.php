@@ -1,8 +1,8 @@
 <?php
- $mode ="";
-$mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : null;
-$height = isset($_REQUEST['height']) ? $_REQUEST['height'] : null;
-$width = isset($_REQUEST['width']) ? $_REQUEST['width'] : null;
+    $mode ="";
+    $mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : null;
+    $height = isset($_REQUEST['height']) ? $_REQUEST['height'] : null;
+    $width = isset($_REQUEST['width']) ? $_REQUEST['width'] : null;
 
 $tittle ="";$content="";
 switch($mode){

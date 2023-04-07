@@ -1,13 +1,14 @@
-class animationStyle{
-    constructor(el,time,strColor="#4d2982"){
+class AnimationStyle{
+    constructor(el,time,strColor="#4d2982",isFragment = false){
+        this.helper = new Helper();
         this.$el = el;
-        
         this.width = $(el).width();
         this.height = $(el).height();
         this.strColor = strColor;
+        var position = isFragment ? "fixed" : "absolute";
         this.option = {
             "z-index":"1000",
-            "position": "absolute",
+            "position": position,
             "background-color":this.strColor,
             "box-shadow": "0px 0px 50px 0px" + this.strColor,
             "-webkit-box-shadow": "0px 0px 50px 0px" + this.strColor,
@@ -20,7 +21,7 @@ class animationStyle{
     animation1(){
         let mode = 2;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
         
         child
         .css(this.option)
@@ -46,7 +47,7 @@ class animationStyle{
     animation2(){
         let mode = 2;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -73,7 +74,7 @@ class animationStyle{
     animation3(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -90,7 +91,7 @@ class animationStyle{
     animation4(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -109,7 +110,7 @@ class animationStyle{
     animation5(){
         let mode = 4;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -166,7 +167,7 @@ class animationStyle{
     animation6(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -193,7 +194,7 @@ class animationStyle{
     animation7(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         //.css(this.option)
@@ -225,7 +226,7 @@ class animationStyle{
     animation8(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         //.css(this.option)
@@ -255,7 +256,7 @@ class animationStyle{
     animation9(){
         let mode = 1;
 
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -285,7 +286,7 @@ class animationStyle{
     animation10(){
         let mode = 2;
         let deg = Math.round(Math.atan2(this.height,this.width) * 180 / Math.PI);
-        let child = loadPage.prototype.createChild(this.$el,mode);
+        let child = this.helper.createChild(this.$el,mode);
 
         child
         .css(this.option)
@@ -293,7 +294,6 @@ class animationStyle{
             "height": this.height,
             "width" : this.width*1.5,
             "transform": "rotate(0deg)"
-
         })
         .addClass("Animation10")
         .animate({ backgroundColor: this.strColor }, "slow");
@@ -355,10 +355,8 @@ class animationStyle{
 
     }
     render(){
-        let random = loadPage.prototype.randomIntFromInterval(1,10);
-
+        let random = this.helper.randomIntFromInterval(1,10);
         let functionName = "animation"+random;
-
         this[functionName]();
 
     }
@@ -368,6 +366,7 @@ class animationStyle{
 class loadPage{
     constructor(el,strColor="#4d2982"){
         this.$el = $(el);
+        this.helper = new Helper();
         this.name = this.$el.attr("id");
         this.loading = 'sub-'+this.name;
         this.width = $(el).width();
@@ -376,16 +375,6 @@ class loadPage{
         this.render()
         return true;
         
-    }
-    createChild(selector,n){
-        for (var i = 0; i < n; i++) {
-            selector.append($("<div>"));
-        }
-        return selector.find("div");
-    }
-    randomIntFromInterval(min, max) // min and max included
-    {
-        return Math.floor(Math.random() * (max - min + 1) + min);
     }
     async addLoading(time){
 
@@ -404,35 +393,27 @@ class loadPage{
             {name:"lds-heart",value:1}
         ]
 
-        let randLoad = this.randomIntFromInterval(0, 11);
+        let randLoad = this.helper.randomIntFromInterval(0, 11);
         let op = option[randLoad];
         let loadingClass = op.name;
-        let n = op.value;
 
         let ld = $('<div>').attr("id",this.loading).css({
             "opacity":"0",
             "z-index":"1500",
-            "position": "absolute",
+            "position": "fixed",
             "top":this.height/2-30,
             "left":this.width/2-30
         });
         
-        
         let spinner = $('<div>').addClass(loadingClass)
-
-        this.createChild(spinner,n);
-
+        this.helper.createChild(spinner,op.value);
         ld.append(spinner);
-        
         this.$el.append(ld);
 
         // show and hide
         await ld.animate({ opacity: 1 }, time/2)
         //await ld.animate({ opacity: 0 }, time)
 
-    }
-    animationStyle(time){
-        new animationStyle(this.$el,time,this.strColor);
     }
     clear(timeout){
         this.$el.css("z-index",2000)
@@ -446,8 +427,21 @@ class loadPage{
     }
     render(){
         let time = 2000;
-        this.animationStyle(time);
+        new AnimationStyle(this.$el,time,this.strColor);
         this.addLoading(time);
         this.clear(time);
+    }
+}
+
+class Helper{
+    createChild(selector,n){
+        for (var i = 0; i < n; i++) {
+            selector.append($("<div>"));
+        }
+        return selector.find("div");
+    }
+    randomIntFromInterval(min, max) // min and max included
+    {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 }
