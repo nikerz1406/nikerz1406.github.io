@@ -4,7 +4,7 @@ $(document).ready(function(){
         url:'fragments/temp1.html',
         content:"#content",
         id:"#loading",
-        time:4000
+        time:2000
     })).render()
 
 })
