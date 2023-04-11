@@ -26,19 +26,20 @@ class Spinner{
         let loadingClass = op.name;
 
         let spinner = $('<div>').addClass(loadingClass).css({
-            "display": "table-cell",
             "text-align": "center",
-            "vertical-align": "middle"
+            "vertical-align": "middle",
+            "position": "absolute",
+            "left": "47%",
+            "top": "55%",
         })
 
         this.helper.createChild(spinner,op.value);
 
         var container = $('<div>').attr("id",this.id).css({
-            "opacity":"0",
             "z-index":"1500",
             "position":"fixed",
-            "display":"table",
             "width": "100vw",
+            "height": "100vh",
         })
         container.append(spinner);
         return container;
@@ -530,6 +531,7 @@ CurtainFactory.prototype.render = function(){
     var time = this.time;
     this.root.append(this.spinner);
     this.root.append(this.curtain);
+
     $("body").css({
         "overflow":"hidden"
     })

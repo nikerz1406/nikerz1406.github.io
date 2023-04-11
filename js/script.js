@@ -7,4 +7,8 @@ $(document).ready(function(){
         time:2000
     })).render()
 
+    // var sniper = new Spinner();
+
+    // $("#loading").html(sniper);
+
 })
