@@ -1,12 +1,13 @@
 class ColorsPage{
     constructor(){
         this.option()
+        this.helper = new Helper()
         this.exec()
     }
     valueColor(){
-        var randColor = loadPage.prototype.randomIntFromInterval(0, 8);
+        var randColor = this.helper.randomInt(0, 8);
         while (randColor == $("[data-color]").data("color")) {
-        randColor = loadPage.prototype.randomIntFromInterval(0, 8);
+        randColor = this.helper.randomInt(0, 8);
         }
         return randColor;
     }
@@ -278,23 +279,6 @@ function pushString(str, selector = this, indexStr = 0, jubTime = 20) {
     indexStr++;
 }
 
-function addContact(data){
-    var page = "modules/cv/loadScreen.php", id = "#main";
-    var h = $("#main").height()*3/7;
-    var w = $("#main").width()/5;
-    setTimeout(function () {
-        var frag = new FragmentSocial(h,w)
-        var html = frag.render(data);
-        $(id).html(html);
-        // $.ajax({
-        //     url: page,
-        //     type: 'POST'
-        //     , data: {mode:data,height:h,width:w}
-        // }).done(function (html) {
-        //     $(id).html(html);
-        // })
-    }, 1000);
-}
 
 function triggerTranslate(){
     var btn = $('button#translate');
@@ -307,10 +291,8 @@ function triggerTranslate(){
     .animate({opacity:0},time*2/3)
     .animate({opacity:1},time/6)
 
-    new Translate()
-    if(!ColorsPage){
-        new ColorsPage()
-    }
+    new Translate();
+    new ColorsPage();
 
     setTimeout(() => {
         btn.on('click',triggerTranslate)
@@ -340,4 +322,5 @@ $(document).ready(function(){
 
     // btn translate 
     $('button#translate').on("click",triggerTranslate)
+
 })

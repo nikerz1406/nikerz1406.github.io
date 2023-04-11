@@ -12,6 +12,7 @@
     min-height:20% ;
     background: #4d2982;
     color : white;
+    border-radius: 4px;
 }
 
 h5 { font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif; font-size: 20px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; }

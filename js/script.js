@@ -4,11 +4,7 @@ $(document).ready(function(){
         url:'fragments/temp1.html',
         content:"#content",
         id:"#loading",
-        time:2000
+        time:3000
     })).render()
-
-    // var sniper = new Spinner();
-
-    // $("#loading").html(sniper);
 
 })
