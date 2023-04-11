@@ -5,6 +5,7 @@ $(document).ready(function(){
         content:"#content",
         id:"#loading",
         time:3000
-    })).render()
+    }));
+
 
 })

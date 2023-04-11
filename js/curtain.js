@@ -87,7 +87,6 @@ Curtain.prototype.buildContainer = function(name = 'curtain'){
 Curtain.prototype.initSizeScreen = function(){
     this.height = screen.height;
     this.width = screen.width;
-    this.is_mobile = screen.height <= screen.width;
 
     this.default_css = {
         "z-index":"1000",
@@ -108,7 +107,10 @@ Curtain.prototype.build = function(){
 }
 Curtain.prototype.buildAnimation = function(){
 
-    let number = this.helper.randomInt(1,10);
+    //TODO : support mobile screen animation 5 -> 10
+    // this.helper.is_support()
+
+    let number = this.helper.randomInt(1,4);
     let functionName = `animation${number}`
     this[functionName]();
 
@@ -512,10 +514,22 @@ class CurtainFactory{
         this.time = option.time ? option.time : 2000;
         this.helper = new Helper();
 
+        // check is support
+        if(this.helper.is_support() == false){
+            this.loadPage();
+            return null;
+        }
+
         var curtain = new Curtain(this.time);
 
-        return this.buildCurtain(curtain).buildSpinner();
+        this.buildCurtain(curtain)
+        .buildSpinner()
+        .render();
     }
+}
+CurtainFactory.prototype.loadPage = async function(){
+    var page = await this.helper.send(this.url,{ html : true})
+    this.content.html(page)
 }
 CurtainFactory.prototype.buildSpinner = function(spiner){
     this.spinner = spiner ? spiner : (new Spinner());
@@ -543,8 +557,7 @@ CurtainFactory.prototype.render = function(){
     },time)
     
     setTimeout(async ()=>{
-        var page = await _this.helper.send(_this.url,{ html : true})
-        _this.content.html(page)
+        this.loadPage()
     },(time/2))
 
 }

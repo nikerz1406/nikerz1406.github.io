@@ -12,9 +12,25 @@ class Helper{
     randomID(){
         return Math.floor(Math.random() * 256);
     }
+
     
 }
+Helper.prototype.is_support = function(){
+    var height = screen.height;
+    var width = screen.width;
 
+    // case mobile
+    if(width <= 768){
+        return false;
+    }
+
+    // case square
+    if(width == height){
+        return false;
+    }
+    
+    return true;
+}
 Helper.prototype.send = function (url,option = {}) {
 
     var data = option.data ? option.data : [];
