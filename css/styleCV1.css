@@ -259,6 +259,21 @@ display: none !important;
     box-sizing: border-box;
     padding: 0.25rem 0.3rem 0.3rem;
 }
+#contract ul{
+    margin-left: 0;
+    padding: 0.5rem 1rem;
+}
+#contract .contact-panel div{
+    float: left;
+    padding-right: 0.5rem;
+}
+#contract li{
+    color: #4d2982;
+    list-style: none;
+}
+#contract a{
+    color: #4d2982;
+}
 #social>div>div{
     width: 2.3rem;
     height: 2.3rem;

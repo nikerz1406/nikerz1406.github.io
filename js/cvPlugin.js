@@ -148,7 +148,7 @@ class Translate{
             {name:'achie'},
             {name:'t-achie'},
             {name:'achie-des'},
-            {name:'contract'},
+            {name:'contact'},
             {name:'watting'},
             {name:'tech'}
         ];
@@ -183,76 +183,6 @@ Translate.prototype.pushData = function(data, jubTime = 20, delay = 0) {
     }, delay)
 }
 
-class FragmentSocial{
-    constructor(height,width){
-        this.height = height;
-        this.width = width;
-    }
-}
-FragmentSocial.prototype.render = function(mode){
-    switch (mode) {
-        case "github":            
-            return this.github();
-            case "gmail":            
-            return this.gmail();
-            case "skype":            
-            return this.skype();
-            case "facebook":
-                return this.facebook();
-                case "website":
-                    return this.website();
-        default:
-            return this.default();
-    }
-}
-FragmentSocial.prototype.github = function(){
-    return this.template({
-        tittle : "GitHub :&nbsp; ",
-        content:" <a target='_blank' href='https://github.com/nikerz1406'>https://github.com/nikerz1406</a>"
-    })
-}
-FragmentSocial.prototype.gmail = function(){
-    return this.template({
-        tittle : "Gmail :&nbsp; ",
-        content:" <a target='_blank' href='mailto:61amakhe@gmail.com'>61amakhe@gmail.com</a>"
-    })
-}
-FragmentSocial.prototype.skype = function(){
-    return this.template({
-        tittle : "Skype :&nbsp; ",
-        content:" <a target='_blank' href='https://join.skype.com/invite/wDEfoVhYyyed'>https://join.skype.com/invite/wDEfoVhYyyed</a>"
-    })
-}
-FragmentSocial.prototype.facebook = function(){
-    return this.template({
-        tittle : "Facebook :&nbsp; ",
-        content:" <a target='_blank' href='https://www.facebook.com/le.hue.3139'>https://www.facebook.com/le.hue.3139</a>"
-    })
-}
-FragmentSocial.prototype.website = function(){
-    return this.template({
-        tittle : "Website :&nbsp; ",
-        content:" <a target='_blank' href='http://mrlehue.com/'>http://mrlehue.com/</a>"
-    })
-}
-FragmentSocial.prototype.phone = function(){
-    return this.template({
-        tittle : "Phone :&nbsp; ",
-        content:" <a target='_blank' href=''>+084 097870****</a>"
-    })
-}
-FragmentSocial.prototype.default = function(){
-    return this.template({
-        tittle : "Click on&nbsp; ",
-        content:"my social icon."
-    })
-}
-FragmentSocial.prototype.template = function({tittle,content}){
-    return `<div style='padding:${this.height}px;${this.width}px'>
-                <span style='float:left'>${tittle}</span>
-                <p style='float:left'>${content}</p>
-            </<div>`;
-}
 function skillIn(el){
     var ligColor = $("header").data("ligcolor");
     var strColor = $("header").data("strcolor");
@@ -365,39 +295,6 @@ function addContact(data){
         // })
     }, 1000);
 }
-function loadingScreen(el){
-    
-    var data = el=!null ? $(el).data("social") : null ;
-    var strColor = $("header").data("strcolor")
-    var ligColor = $("header").data("ligcolor")
-
-    ligColor = ligColor==null ? "#FFA726" : ligColor;
-
-    new loadPage("#loading-screen",strColor)
-    
-    var str = $("#attention").find("span").text()
-    var oldStr = $("#contract H5").text();
-    var len = str.length;
-    
-    pushString(str,"#contract H5",len-3,100);
-
-    addContact(data);
-
-    // disable button
-    $("#social>div").off("click")
-
-    setTimeout(() => {
-        $("#social>div").on("click",function(){
-            loadingScreen(this);
-            $("#social>div>div").css("background","white");
-
-            $(this).find("div").css("background",ligColor)
-        })
-        $("#contract H5").text(oldStr);
-    }, 2000)
-
-}
-
 
 function triggerTranslate(){
     var btn = $('button#translate');
@@ -423,7 +320,6 @@ function triggerTranslate(){
 
 // main exec<?
 $(document).ready(function(){
-    loadingScreen(null);
 
     $("#skill .card-body div.tb-circle")
     .hover(
