@@ -29,8 +29,9 @@ class Spinner{
             "text-align": "center",
             "vertical-align": "middle",
             "position": "absolute",
-            "left": "47%",
-            "top": "55%",
+            "display": "table-cell",
+            "left": "47vw",
+            "top": "50vh",
         })
 
         this.helper.createChild(spinner,op.value);
@@ -38,6 +39,7 @@ class Spinner{
         var container = $('<div>').attr("id",this.id).css({
             "z-index":"1500",
             "position":"fixed",
+            "display": "table",
             "width": "100vw",
             "height": "100vh",
         })
@@ -85,8 +87,11 @@ Curtain.prototype.buildContainer = function(name = 'curtain'){
     this.container.css(this.default_css);
 }
 Curtain.prototype.initSizeScreen = function(){
-    this.height = screen.height;
-    this.width = screen.width;
+    
+    this.height = 100;
+
+    // support portrait screen
+    this.width = window.innerHeight/window.innerWidth >=1.5 ? 100 : 150;
 
     this.default_css = {
         "z-index":"1000",
@@ -107,8 +112,7 @@ Curtain.prototype.build = function(){
 }
 Curtain.prototype.buildAnimation = function(){
 
-    //TODO : support mobile screen animation 5 -> 10
-    // this.helper.is_support()
+    // TODO : animation5 6 7 8 9 10
 
     let number = this.helper.randomInt(1,4);
     let functionName = `animation${number}`
@@ -133,8 +137,8 @@ Curtain.prototype.animation10 = function(){
     .css({
         ...this.default_css,
         ...{
-            "height": this.height,
-            "width" : this.width*1.5,
+            "height": `${this.height}vh`,
+            "width" : `${this.width*2}vw`,
             "transform": "rotate(0deg)",
             "-webkit-animation": `Animation8 ${second_time}s ease`,
             "animation": `Animation8 ${second_time}s ease`
@@ -145,7 +149,7 @@ Curtain.prototype.animation10 = function(){
 
     child.eq(0)
     .css({
-        "top":this.height*-1,
+        "top":`${this.height*-1}vh`,
         "transform-origin": "0% 100%",
         "left": "0",
     })
@@ -172,7 +176,7 @@ Curtain.prototype.animation10 = function(){
 
     child.eq(1)
     .css({
-        "top":this.height,
+        "top":`${this.height}vh`,
         "transform-origin": "100% 0%",
         "right": "0"
     })
@@ -209,9 +213,8 @@ Curtain.prototype.animation9 = function(){
         ...this.default_css,
         ...{
             "border-radius": "50%",
-            "top": this.height/2,
-            "left": this.width / 2,
-            "transform-origin":"0% 100%",
+            "top": `${this.height/2}vh`,
+            "left": `${this.width/2}vw`,
             "-webkit-animation": `Animation8 ${second_time}s ease`,
             "animation": `Animation8 ${second_time}s ease`
         }
@@ -219,16 +222,16 @@ Curtain.prototype.animation9 = function(){
     .addClass("Animation9")
     .animate({ backgroundColor: this.strColor }, "slow")
     .animate({
-        top: "-=" + (this.width * 1.1 / 2),
-        height: "+=" + (this.width * 1.1),
-        width: "+=" + (this.width * 1.1),
-        left: "-=" + (this.width * 1.1 / 2)
+        top:`-=${this.width * 1.1 / 2}vw`,
+        height: `+=${this.width * 1.1}vw`,
+        width:`+=${this.width * 1.1}vw`,
+        left: `-=${this.width * 1.1 / 2}vw`,
     }, this.time/2.5)
     .animate({
-        top: "+=" + (this.width * 1.1 / 2),
-        height: "-=" + (this.width *1.1),
-        width: "-=" + (this.width * 1.1),
-        left: "+=" + (this.width * 1.1 / 2)
+        top: `+=${this.width * 1.1 / 2}vw`,
+        height:  `-=${this.width * 1.1}vw`,
+        width: `-=${this.width * 1.1}vw`,
+        left: `+=${this.width * 1.1 / 2}vw`,
     }, this.time/2.5);
 
 }
@@ -241,26 +244,26 @@ Curtain.prototype.animation8 = function(){
     child
     .css({
         "z-index": "1000",
-        "position": "absolute",
         "border-radius": "50%",
+        "position": "absolute",
         "background-color": "none",
-        "top":this.height/2,
-        "left":this.width/2,
+        "top":`${this.height/2}vh`,
+        "left":`${this.width/2}vw`,
         "border": '0 solid ' + this.strColor,
         "-webkit-animation": `Animation8 ${second_time}s ease`,
         "animation": `Animation8 ${second_time}s ease`
     })
     .addClass("Animation8")
     .animate({
-        top: "-=" + (this.width),
-        left: "-=" + (this.width),
-        borderWidth: (this.width) + "px " + (this.width) + "px"
+        top: `-=${this.width}vw`,
+        left: `-=${this.width}vw`,
+        borderWidth: `${this.width}vw ${this.width}vw`
     }, this.time/1.5)
     .animate({
-        top: "-=" + (this.width * 1.2 / 2),
-        height: "+=" + (this.width * 1.2),
-        width: "+=" + (this.width * 1.2),
-        left: "-=" + (this.width * 1.2 / 2)
+        top:`-=${this.width * 1.2 / 2}vw`,
+        height: `+=${this.width * 1.2}vw`,
+        width: `+=${this.width * 1.2}vw`,
+        left: `-=${this.width * 1.2 / 2}vw`
     }, this.time/2.5);
 
 }
@@ -274,31 +277,32 @@ Curtain.prototype.animation7 = function(){
     .css({
         ...this.default_css,
         ...{
-            "top":this.height/2,
-            "left":this.width/2,
+            "position":"absolute",
+            "top":`${this.height/2}vh`,
+            "left":`${this.width/2}vw`,
             "border": '0 solid ' + this.strColor,
             "background-color":"none",
             "-webkit-animation": `Animation7 ${second_time}s ease`,
             "animation": `Animation7 ${second_time}s ease`,
-            // "animation-duration": `${second_time}s`
         }
     })
     .addClass("Animation7")
     .animate({
-        top: "-=" + (this.height / 2),
-        left: "-=" + (this.width / 2),
-        borderWidth: (this.height / 2) + "px " + (this.width / 2) + "px"
+        top:`-=${this.height / 2}vh`,
+        left:`-=${this.width / 2}vw`,
+        borderWidth:`${this.height / 2}vh ${this.width / 2}vw`,
     }, this.time/2)
     .animate({
-        top: "-=" + (this.height / 2),
-        height: "+=" + this.height,
-        width: "+=" + this.width,
-        left: "-=" + (this.width / 2)
+        top: `-=${this.height/2}vh`,
+        height:`+=${this.height}vh`,
+        width: `+=${this.width}vw`,
+        left: `-=${this.width/2}vw`
     }, this.time/2);
 
 }
 Curtain.prototype.animation6 = function(){
     let mode = 1;
+
     let child = this.helper.createChild(this.container,mode);
 
     let second_time = this.covertTime();
@@ -307,8 +311,8 @@ Curtain.prototype.animation6 = function(){
     .css({
         ...this.default_css,
         ...{
-            "top":this.height/2,
-            "left":this.width/2,
+            "top":`${this.height/2}vh`,
+            "left":`${this.width/2}vw`,
             "-webkit-animation": `Animation6 ${second_time}s ease`,
             "animation": `Animation6 ${second_time}s ease`
         }
@@ -316,16 +320,16 @@ Curtain.prototype.animation6 = function(){
     .addClass("Animation6")
     .animate({ backgroundColor: this.strColor }, "slow")
     .animate({
-        top: "-=" + (this.height / 2),
-        height: "+=" + this.height,
-        width: "+=" + this.width,
-        left: "-=" + (this.width / 2)
+        top:`-=${ this.height / 2 }vh`,
+        height:`+=${ this.height }vh`,
+        width:`+=${this.width}vw`,
+        left:`-=${this.width/2}vw`
     }, this.time/4)
     .animate({
-        top: "+=" + (this.height / 2),
-        height: "-=" + this.height,
-        width: "-=" + this.width,
-        left: "+=" + (this.width / 2)
+        top:`+=${this.height / 2}vh`,
+        height:`-=${this.height}vh`,
+        width: `-=${this.width}vw`,
+        left: `+=${this.width / 2}vw`
     }, this.time/2);
 
 }
@@ -339,8 +343,8 @@ Curtain.prototype.animation5 = function(){
     .css({
         ...this.default_css,
         ...{
-            "width":this.width,
-            "height":this.height,
+            "width":`${this.width}vw`,
+            "height":`${this.height}vh`,
             "-webkit-animation": `Animation5 ${second_time}s ease`,
             "animation": `Animation5 ${second_time}s ease`
         }
@@ -349,45 +353,45 @@ Curtain.prototype.animation5 = function(){
     .animate({ backgroundColor: this.strColor }, "slow");
 
     child.eq(0)
-    .css("top",this.height*-1)
+    .css("top",`${this.height*-1}vh`)
     .animate({
-        top: "+=" + this.height / 2,
+        top: `+=${this.height / 2}vh`,
     }, this.time/2.5)
     .animate({
-        top: "-=" + this.height / 2,
+        top: `-=${this.height / 2}vh`,
     }, this.time/2.5);
 
     child.eq(1)
-    .css("top",this.height)
+    .css("top",`${this.height}vh`)
     .animate({
-        top: "-=" + this.height / 2,
+        top: `-=${this.height / 2}vh`,
     }, this.time/2.5)
     .animate({
-        top: "+=" + this.height / 2,
+        top: `+=${this.height / 2}vh`,
     }, this.time/2.5);
 
     child.eq(2)
     .css({
         "top":0,
-        "left":this.width*-1
+        "left":`${this.width*-1}vw`
     })
     .animate({
-        left: "+=" + this.width,
+        left:`+=${this.width}vw`,
     }, this.time/2.5)
     .animate({
-        left: "-=" + this.width,
+        left:`-=${this.width}vw`,
     }, this.time/2.5);
 
     child.eq(3)
     .css({
         "top":0,
-        "left":this.width
+        "left":`${this.width}vw`
     })
     .animate({
-        left: "-=" + this.width,
+        left:`-=${this.width}vw`,
     }, this.time/2.5)
     .animate({
-        left: "+=" + this.width,
+        left:`+=${this.width}vw`,
     }, this.time/2.5);
 
 }
@@ -403,10 +407,10 @@ Curtain.prototype.animation4 = function(){
         ...{
             "transform-origin": "100% 100%",
             "top": "0",
-            "width":this.width*1.1,
-            "height":this.height*3,
-            "top":this.height*-2,
-            "left":this.width*-0.1,
+            "width":`${this.width*1.5}vw`,
+            "height":`${this.height*3}vh`,
+            "top":`${this.height*-2}vh`,
+            "left":`${this.width*-0.1}vw`,
             "-webkit-animation": `Animation4 ${second_time}s ease`,
             "animation": `Animation4 ${second_time}s ease`
         }   
@@ -427,8 +431,8 @@ Curtain.prototype.animation3 = function(){
         ...{
             "transform-origin":"0% 0%",
             "top":"0",
-            "width":this.width*1.1,
-            "height":this.width,
+            "width":`${this.width*1.5}vw`,
+            "height":`${this.height}vh`,
             "-webkit-animation": `Animation3 ${second_time}s ease`,
             "animation": `Animation3 ${second_time}s ease`
         }
@@ -448,9 +452,9 @@ Curtain.prototype.animation2 = function(){
     .css({
         ...this.default_css,
         ...{
-            "height":this.height/2,
-            "width":this.width*1.5,
-            "left":this.width*-0.2,
+            "height":`${this.height/2}vh`,
+            "width":`${this.width*1.8}vw`,
+            "left":`${this.width*-0.2}vw`,
             "animation":`Animation2 ${second_time}s ease`,
             "-webkit-animation":`Animation2 ${second_time}s ease`,
         }
@@ -458,8 +462,8 @@ Curtain.prototype.animation2 = function(){
     .animate({ backgroundColor: this.strColor }, "slow");
 
     child.eq(0).css({
-        "transform-origin": "-30% 100%",
-        "top":this.height/2
+        "transform-origin": "0% 100%",
+        "top":`${this.height/2}vh`
     })
 
     child.eq(1)
@@ -480,9 +484,9 @@ Curtain.prototype.animation1 = function(){
     .css({
         ...this.default_css,
         ...{
-            "height":this.height/2,
-            "width":this.width*1.3,
-            "left":this.width*-0.2,
+            "height":`${ this.height/2 }vh`,
+            "width":`${this.width*1.3 }vw`,
+            "left":`${this.width*-0.2}vw`,
             "animation":`Animation1 ${second_time}s ease`,
             "-webkit-animation":`Animation1 ${second_time}s ease`,
         }
@@ -498,7 +502,7 @@ Curtain.prototype.animation1 = function(){
     child.eq(1)
     .css({
         "transform-origin": "100% 0%",
-        "top":this.height/2
+        "top":`${ this.height/2 }vh`
     })
 
 }

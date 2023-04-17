@@ -165,13 +165,12 @@ class Translate{
     }
 }
 Translate.prototype.PushString = function(str, selector = this, indexStr = 0, jubTime = 20) {
-    if (indexStr <= str.length) {
-        $(selector).text(str.slice(0, indexStr));
-    } else { }
-    
-    setTimeout(function () { 
+    if (indexStr > str.length) return true;
 
-        Translate.prototype.PushString(str, selector, indexStr, jubTime); }, jubTime);
+    $(selector).text(str.slice(0, indexStr));
+    setTimeout(function () { 
+        Translate.prototype.PushString(str, selector, indexStr, jubTime);
+    }, jubTime);
     indexStr++;
 }
 Translate.prototype.pushData = function(data, jubTime = 20, delay = 0) {
@@ -186,7 +185,85 @@ Translate.prototype.pushData = function(data, jubTime = 20, delay = 0) {
     }, delay)
 }
 
-function skillIn(el){
+
+class CVEffect {
+    constructor(){
+        return this;
+    }
+}
+CVEffect.prototype.addEventListener = function(){
+    var _this = this;
+
+    $("#skill .card-body div.tb-circle")
+    .hover(
+        (e) => _this.skillIn(e.target),(e) => _this.skillOut(e.target)
+    )
+
+    $("#attributes .card-body").hover(
+        (e) => _this.attrIn(e.target),(e) => _this.attrOut(e.target)
+    )
+
+    $(".card-body").hover(
+        (e) => _this.headerIn(e.target),(e) => _this.headerOut(e.target)
+    )
+    
+    $("#achievement p").hover(
+        (e)=>_this.achIn(e.target),(e)=>_this.achOut(e.target)
+    )
+    
+    // btn translate 
+    $('button#translate').on("click",()=>{
+        this.triggerTranslate()
+    })
+}
+CVEffect.prototype.setHover = function(e){
+
+}
+CVEffect.prototype.headerOut = function (e){
+    $(e).prev().find("H5").removeClass("rubberBand");
+}
+
+CVEffect.prototype.achIn = function (e){
+    $(e).prev().find("span").addClass("rotateSquare");
+}
+
+CVEffect.prototype.achOut = function(e){
+    $(e).prev().find("span").removeClass("rotateSquare");
+}
+
+CVEffect.prototype.pushString = function (str, selector = this, indexStr = 0, jubTime = 20) {
+    if(indexStr > str.length){
+        return true;
+    }
+    
+    $(selector).text(str.slice(0, indexStr));
+    var _this = this;
+    setTimeout(function () { _this.pushString(str, selector, indexStr, jubTime); }, jubTime);
+    indexStr++;
+}
+
+
+CVEffect.prototype.triggerTranslate = function (){
+    var _this = this;
+    var btn = $('button#translate');
+    btn.off()
+
+    var time = $('[data-about]').text().length*20;
+
+    btn
+    .animate({opacity:0},time/6)
+    .animate({opacity:0},time*2/3)
+    .animate({opacity:1},time/6)
+
+    new Translate();
+    new ColorsPage();
+
+    setTimeout(() => {
+        btn.on('click',_this.triggerTranslate)
+    }, time);
+   
+}
+CVEffect.prototype.skillIn = function(el){
     var ligColor = $("header").data("ligcolor");
     var strColor = $("header").data("strcolor");
     var pos = $(el).closest("td").index();
@@ -203,8 +280,7 @@ function skillIn(el){
         }
     })
 }
-
-function skillOut(el){
+CVEffect.prototype.skillOut = function (el){
     var ligColor = $("header").data("ligcolor");
     var strColor = $("header").data("strcolor");
     var root = $(el).closest("td").closest("tr");
@@ -212,8 +288,7 @@ function skillOut(el){
         root.find("div.check").css("background",strColor)
         root.find("div").removeClass("border-circle")
 }
-
-function attrIn(el){
+CVEffect.prototype.attrIn = function (el){
     var circles = $(el).find("div.skill-circle")
         var newTop = $(el).closest("#attributes").width()*0.03;
 
@@ -234,8 +309,7 @@ function attrIn(el){
             , opacity: 0.7
         });
 }
-
-function attrOut(el){
+CVEffect.prototype.attrOut = function (el){
     var circles = $(el).find("div.skill-circle")
         var newTop = $(el).closest("#attributes").width()*0.03;
 
@@ -256,73 +330,12 @@ function attrOut(el){
             opacity: 0.5
         });
 }
-
-function headerIn(e){
+CVEffect.prototype.headerIn = function (e){
     $(e).prev().find("H5").addClass("rubberBand");
 }
-
-function headerOut(e){
-    $(e).prev().find("H5").removeClass("rubberBand");
-}
-
-function achIn(e){
-    $(e).prev().find("span").addClass("rotateSquare");
-}
-
-function achOut(e){
-    $(e).prev().find("span").removeClass("rotateSquare");
-}
-
-function pushString(str, selector = this, indexStr = 0, jubTime = 20) {
-    if (indexStr <= str.length) {
-        $(selector).text(str.slice(0, indexStr));
-    } else { }
-    setTimeout(function () { pushString(str, selector, indexStr, jubTime); }, jubTime);
-    indexStr++;
-}
-
-
-function triggerTranslate(){
-    var btn = $('button#translate');
-    btn.off()
-
-    var time = $('[data-about]').text().length*20;
-
-    btn
-    .animate({opacity:0},time/6)
-    .animate({opacity:0},time*2/3)
-    .animate({opacity:1},time/6)
-
-    new Translate();
-    new ColorsPage();
-
-    setTimeout(() => {
-        btn.on('click',triggerTranslate)
-    }, time);
-   
-}
-
 // main exec<?
 $(document).ready(function(){
 
-    $("#skill .card-body div.tb-circle")
-    .hover(
-        (e) => skillIn(e.target),(e) => skillOut(e.target)
-    )
-
-    $("#attributes .card-body").hover(
-        (e) => attrIn(e.target),(e) => attrOut(e.target)
-    )
-
-    $(".card-body").hover(
-        (e) => headerIn(e.target),(e) => headerOut(e.target)
-    )
-    
-    $("#achievement p").hover(
-        (e)=>achIn(e.target),(e)=>achOut(e.target)
-    )
-
-    // btn translate 
-    $('button#translate').on("click",triggerTranslate)
+    (new CVEffect()).addEventListener();
 
 })
