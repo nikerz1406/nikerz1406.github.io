@@ -48,7 +48,9 @@ class ColorsPage{
             ".list-style",
             ".uncheck",
             "div.skill-circle:nth-child(3)",
-            "#main"
+            "#main",
+            "card-body > b",
+            "card-body > p",
             ],
             str:[
             "header>div:nth-child(2)",
