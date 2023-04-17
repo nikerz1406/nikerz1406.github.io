@@ -37,7 +37,9 @@ class ColorsPage{
             str:[
                 "#skill td",
                 ".custom-box a",
-                ".custom-box li"
+                ".custom-box li",
+                ".custom-box b",
+                ".custom-box p",
             ]
         }
         this.backgrounds = {
@@ -49,8 +51,6 @@ class ColorsPage{
             ".uncheck",
             "div.skill-circle:nth-child(3)",
             "#main",
-            "card-body > b",
-            "card-body > p",
             ],
             str:[
             "header>div:nth-child(2)",
