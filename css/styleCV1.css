@@ -72,30 +72,36 @@ p[data-achie-des]{
  font-size:1rem;
 }
 }
-header>div:nth-child(1){
+header.row .media{
     position: relative;
     background: #FFA726;
+    color:black;
 }
-header>div:nth-child(2){
+header.row .about-me{
     position: relative;
     word-wrap:break-word;
     /* min-width: 44.500%; */
     min-height: 5rem;
     z-index: 2;
 }
-header>div:nth-child(2)>p{
+header.row .about-me::after{
+    display: block;
+    position: absolute;
+    top:0;
+    left:-6rem;
+    content: "";
+    width: 50%;
+    height: 100%;
+    background-color: #4d2982;
+    transform: skewX(25deg);
+    z-index: -1;
+}
+header.row .about-me>p{
     width: 90%;
     margin: 1rem 1rem 0rem 1rem;
 }
-header>div:nth-child(2)>h3{
+header.row .about-me>h3{
     margin:1rem;
-}
-header>div:nth-child(2)>span {
-position: absolute;
-    /* content: ""; */
-    transform: rotate(45deg);
-    background: #4d2982;
-    z-index: -1;
 }
 header .media{
     padding: 2rem 2rem 1.5rem;
@@ -105,101 +111,89 @@ header .media-body{
     }
 
 header .media-body p {
-    line-height: 15px;
-    }
+    line-height: 7px;
+}
 @media only screen and (min-width: 1200px) {
 #attributes,#achievement{
     left:2rem;
 }
-header>div:nth-child(1){
+header.row .media{
     top: 0px;
     width: 55.4%;
     min-height: 12rem;
 }
-header>div:nth-child(2){
+header.row .about-me{
     min-height: 12rem;
     width: 44.5%;
     background: #4d2982;
 }
 /*chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0){
-  header>div:nth-child(2){
+  header.row .about-me{
     min-width: 44.502%;
     padding-top: 1rem;
 }
 }
 /*firefox*/
 @-moz-document url-prefix() {
- header>div:nth-child(2){
+ header.row .about-me{
     min-width: 44.500%;
 }
-}
-header>div:nth-child(2)>span {
-    width: 65%;
-    min-height: 12rem;
-    left: -42.3%;
-    top: -26.4%;
 }
 .card{
     max-width: 30rem;
 }
 }
 @media only screen and (max-width: 1199px) {
-    header>div:nth-child(1){
+    header.row .media{
     top: 0px;
     width: 55.5%;
     min-height: 12rem;
 }
-header>div:nth-child(2){
+header.row .about-me{
     min-height: 12rem;
     width: 44.5%;
     background: #4d2982;
 }
-  header>div:nth-child(2)>span{
-    width: 100%;
-    min-height: 12rem;
-    left: -59.8%;
-    top: -22.4%;
-}
+
 }
 @media only screen and (max-width: 991px) {
     header .media-body{
         display: block;
     }
-    header>div:nth-child(1) {
+    header.row .media {
       width : 45%;
     }
-    header>div:nth-child(2) {
+    header.row .about-me {
       width : 55%;
     }
-  header>div:nth-child(2)>span{
-    /* width: 85%;
-    min-height: 12rem;
-    left: -51.5%;
-    top: -35.4%; */
-    display:none;
-}
+    header.row .about-me::after{
+        display: none;
+    }
+    .media .media-body p{
+        display: none;
+    }
+
 .card-header::before {
         left: 99%;
 }
 }
 @media only screen and (max-width: 767px) {
-  header>div:nth-child(2)>span{
-    width: 144%;;
-    left: -86.5%;
-    top: -35.4%;
-}
-header>div:nth-child(2)>p {
+
+header.row .about-me>p {
     font-size: 15px;
 }
-header>div:nth-child(1) {
+header.row .media {
         width: 32%;
 }
-header>div:nth-child(2) {
+header.row .about-me {
         width: 68%;
 }
-header>div:nth-child(1) .media-body{
+header.row .media .media-body{
     display:none;
+}
+.media img{
+    height: 84%;
 }
 .card{
     max-width: 35rem;
@@ -207,25 +201,23 @@ header>div:nth-child(1) .media-body{
 }
 }
 @media only screen and (max-width: 578px) {
-    header>div:nth-child(2)>span{
-    display:none;
-}
-header>div:nth-child(1) {
+
+header.row .media {
     width: 32%;
 }
-header>div:nth-child(2) {
+header.row .about-me {
     width: 68%;
     height: 10.1rem;
 }
 }
 @media only screen and (max-width: 565px) {
-header>div:nth-child(2) {
+header.row .about-me {
     display:none;
 }
-header>div:nth-child(1) {
+header.row .media {
     width: 100%;
 }
-header>div:nth-child(1) .media-body{
+header.row .media .media-body{
         display: block;
     }
 }
@@ -239,7 +231,7 @@ header>div:nth-child(1) .media-body{
 
 }
 @media only screen and (max-width: 252px) {
-header>div:nth-child(1) .media-body{
+header.row .media .media-body{
         display: none;
     }
 }
