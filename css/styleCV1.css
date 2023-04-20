@@ -84,7 +84,7 @@ header.row .about-me{
     min-height: 5rem;
     z-index: 2;
 }
-header.row .about-me::after{
+header.row .about-me>span{
     display: block;
     position: absolute;
     top:0;
@@ -167,7 +167,7 @@ header.row .about-me{
     header.row .about-me {
       width : 55%;
     }
-    header.row .about-me::after{
+    header.row .about-me>span{
         display: none;
     }
     .media .media-body p{

@@ -44,7 +44,7 @@ class ColorsPage{
         }
         this.backgrounds = {
             lig:[
-            "header>div:nth-child(1)",
+            "header.row .media",
             ".card-header",
             "footer>div:nth-child(2)",
             ".list-style",
@@ -53,8 +53,8 @@ class ColorsPage{
             "#main",
             ],
             str:[
-            "header>div:nth-child(2)",
-            "header>div:nth-child(2)>span",
+            "header.row .about-me",
+            "header.row .about-me>span",
             ".card-header>span",
             "footer>div:nth-child(1)",
             ".list-style>span",
@@ -192,23 +192,22 @@ class CVEffect {
     }
 }
 CVEffect.prototype.addEventListener = function(){
-    var _this = this;
 
     $("#skill .card-body div.tb-circle")
     .hover(
-        (e) => _this.skillIn(e.target),(e) => _this.skillOut(e.target)
+        (e) => this.skillIn(e.target),(e) => this.skillOut(e.target)
     )
 
     $("#attributes .card-body").hover(
-        (e) => _this.attrIn(e.target),(e) => _this.attrOut(e.target)
+        (e) => this.attrIn(e.target),(e) => this.attrOut(e.target)
     )
 
     $(".card-body").hover(
-        (e) => _this.headerIn(e.target),(e) => _this.headerOut(e.target)
+        (e) => this.headerIn(e.target),(e) => this.headerOut(e.target)
     )
     
     $("#achievement p").hover(
-        (e)=>_this.achIn(e.target),(e)=>_this.achOut(e.target)
+        (e)=>this.achIn(e.target),(e)=>this.achOut(e.target)
     )
     
     // btn translate 
