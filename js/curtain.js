@@ -516,6 +516,7 @@ class CurtainFactory{
         this.spinner = option.spinner ? option.spinner : null;
         this.url = option.url ? option.url : null;
         this.time = option.time ? option.time : 2000;
+        this.callback = option.completed ? option.completed : null;
         this.helper = new Helper();
 
         // check is support
@@ -553,11 +554,14 @@ CurtainFactory.prototype.render = function(){
     $("body").css({
         "overflow":"hidden"
     })
+
     setTimeout(()=>{
         _this.clean();
         $("body").css({
             "overflow":"scroll"
         })
+        
+        if(this.callback) this.callback();
     },time)
     
     setTimeout(async ()=>{

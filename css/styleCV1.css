@@ -4,6 +4,10 @@
     min-height: 700px;
     font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif;
 }
+#content>div{
+    margin-top: 2rem;
+    padding: 0;
+}
 #translate{
     /* position: fixed; */
     top:0%;

@@ -1,4 +1,17 @@
-
+nav{
+  position: absolute;
+  top: 0.5rem;
+  margin-left: 0.2rem;
+  visibility: hidden;
+  z-index: 2;
+}
+nav .tag svg{
+  font-size: 4rem;
+  margin-left:0.2rem;
+}
+nav .tag.active svg{
+  color:red;
+}
 
 .welcome-panel{
     display: table;
