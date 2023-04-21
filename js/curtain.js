@@ -76,7 +76,7 @@ class ColorsStyle{
 class Curtain{
     constructor(time = 2000){
         this.helper = new Helper();
-        this.strColor = "#4d2982";
+        this.strColor = "rgb(233,233,233)";
         this.time = time;
         return this.build();
     }

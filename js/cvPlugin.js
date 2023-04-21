@@ -21,7 +21,8 @@ class ColorsPage{
             { lig:"#A1E232", str:"#0b5761", mid:"#FA968F"},
             { lig:"#ffc413", str:"#0b5e9e", mid:"#ffa27d"},
             { lig:"#b7c7a8", str:"#1b3243", mid:"#d0b8af"},
-            { lig:"#1ac673", str:"#e91e62", mid:"#a9bb41"}
+            { lig:"#1ac673", str:"#e91e62", mid:"#a9bb41"},
+            { lig:"#ffffff", str:"#e91e62", mid:"#e9e9e9"}
         ];
 
         this.border = {
