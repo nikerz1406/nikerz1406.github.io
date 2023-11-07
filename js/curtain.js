@@ -112,9 +112,9 @@ Curtain.prototype.build = function(){
 }
 Curtain.prototype.buildAnimation = function(){
 
-    // TODO : animation5 6 7 8 9 10
+    // TODO : animation8 9 10
 
-    let number = this.helper.randomInt(1,4);
+    let number = this.helper.randomInt(1,7);
     let functionName = `animation${number}`
     this[functionName]();
 
@@ -126,6 +126,7 @@ Curtain.prototype.covertTime = function(mode = 's'){
     return this.time;
 }
 Curtain.prototype.animation10 = function(){
+    
     let mode = 2; 
 
     let deg = Math.round(Math.atan2(this.height,this.width) * 180 / Math.PI + 2);
@@ -236,6 +237,8 @@ Curtain.prototype.animation9 = function(){
 
 }
 Curtain.prototype.animation8 = function(){
+    this.resetWidth()
+
     let mode = 1;
     let child = this.helper.createChild(this.container,mode);
 
@@ -268,6 +271,8 @@ Curtain.prototype.animation8 = function(){
 
 }
 Curtain.prototype.animation7 = function(){
+    this.resetWidth()
+
     let mode = 1;
     let child = this.helper.createChild(this.container,mode);
 
@@ -301,6 +306,8 @@ Curtain.prototype.animation7 = function(){
 
 }
 Curtain.prototype.animation6 = function(){
+    this.resetWidth()
+
     let mode = 1;
 
     let child = this.helper.createChild(this.container,mode);
@@ -333,9 +340,21 @@ Curtain.prototype.animation6 = function(){
     }, this.time/2);
 
 }
+Curtain.prototype.resetWidth = function(){
+    // reset width when symmetry curtain
+    this.width = 100
+}
 Curtain.prototype.animation5 = function(){
+    this.resetWidth()
+
     let mode = 4;
     let child = this.helper.createChild(this.container,mode);
+    console.log({
+        w:this.width,
+        h:this.height,
+    })
+
+    
 
     let second_time = this.covertTime();
 
@@ -558,7 +577,8 @@ CurtainFactory.prototype.render = function(){
     setTimeout(()=>{
         _this.clean();
         $("body").css({
-            "overflow":"scroll"
+            "overflow":"scroll",
+            "overflow-x":"hidden",
         })
         
         if(this.callback) this.callback();
