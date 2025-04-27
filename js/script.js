@@ -14,17 +14,4 @@ $(document).ready(function(){
         completed:setDisplayNav("visible")
     }));
 
-    // $("body").on("click","[data-nav]",function(){
-    //     var page = $(this).data("nav");
-
-    //     $("nav .tag").removeClass("active");
-    //     $(this).addClass("active");
-
-    //     (new CurtainFactory({
-    //         url:`fragments/temp${page}.html`,
-    //         content:"#content",
-    //         id:"#loading",
-    //         time:3000
-    //     }));
-    // })
 })
