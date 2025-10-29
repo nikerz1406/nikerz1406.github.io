@@ -24,43 +24,38 @@ Helper.prototype.is_support = function(){
 }
 Helper.prototype.send = function (url,option = {}) {
 
-    var data = option.data ? option.data : [];
-    var method = option.method ? option.method : "GET";
+    var data = option.data ? option.data : null;
+    var method = option.method ? option.method.toUpperCase() : "GET";
+    var fetchOptions = { method };
+
+    if(method !== "GET" && data){
+        fetchOptions.body = (data instanceof FormData) ? data : JSON.stringify(data);
+        if(!(data instanceof FormData)) {
+            fetchOptions.headers = Object.assign({}, fetchOptions.headers, { 'Content-Type': 'application/json' });
+        }
+    }
 
     return new Promise((resolve, reject) => {
-        $.ajax({
-            url: url,
-            type: method,
-            data: data,
-            beforeSend: function () {
-     
-            },
-            complete: function () {
-  
-            },
-            success: function (res) {
-
-                if(res == null){
-                    reject({});
-                }
-
-                if(option.html){
-                    resolve(res);
-                }
-
-                try {
-                    res = JSON.parse(res);
-                    resolve(res.data);
-                } catch (error) {
-                    resolve("");
-                }
-
-            },
-            timeout: 20000,
-            error: function (jqXHR, textStatus, errorThrown) {  
-                console.log(textStatus);
-                reject({});
-            },
+        fetch(url, fetchOptions)
+        .then(async (res) => {
+            if(!res.ok) throw new Error('Network response was not ok');
+            if(option.html) {
+                return res.text();
+            }
+            let text = await res.text();
+            try {
+                const parsed = JSON.parse(text);
+                resolve(parsed.data !== undefined ? parsed.data : parsed);
+            } catch (e) {
+                resolve(text);
+            }
+        })
+        .then((val) => {
+            if(option.html) resolve(val);
+        })
+        .catch((err) => {
+            console.error('Fetch error:', err);
+            reject({});
         });
     })
 }

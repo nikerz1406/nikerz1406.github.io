@@ -11,7 +11,7 @@ $(document).ready(function(){
         content:"#content",
         id:"#loading",
         time:3000,
-        completed:setDisplayNav("visible")
+        completed: ()=> setDisplayNav("visible") // pass function instead of calling it now
     }));
 
 })

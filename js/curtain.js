@@ -563,7 +563,7 @@ CurtainFactory.prototype.buildCurtain = function(curtain){
     this.curtain = curtain ? curtain : (new Curtain());
     return this;
 }
-CurtainFactory.prototype.render = function(){
+CurtainFactory.prototype.render = async function(){
     var _this = this;
     this.root.html("");
     var time = this.time;
@@ -574,20 +574,20 @@ CurtainFactory.prototype.render = function(){
         "overflow":"hidden"
     })
 
-    setTimeout(()=>{
-        _this.clean();
-        $("body").css({
-            "overflow":"scroll",
-            "overflow-x":"hidden",
-        })
-        
-        if(this.callback) this.callback();
-    },time)
-    
-    setTimeout(async ()=>{
-        this.loadPage()
-    },(time/2))
+    // Start loading page and ensure spinner shows at least "time" ms.
+    const loadPromise = this.loadPage(); // loadPage is async and will populate this.content
+    await Promise.all([
+        loadPromise,
+        new Promise(resolve => setTimeout(resolve, time))
+    ]);
 
+    _this.clean();
+    $("body").css({
+        "overflow":"scroll",
+        "overflow-x":"hidden",
+    })
+
+    if(this.callback) this.callback();
 }
 CurtainFactory.prototype.clean = function(){
     this.root.html("");
