@@ -25,13 +25,13 @@ class Spinner{
         let op = this.options[randLoad];
         let loadingClass = op.name;
 
+        // center the spinner using transform so it remains centered on dynamic screens
         let spinner = $('<div>').addClass(loadingClass).css({
             "text-align": "center",
-            "vertical-align": "middle",
             "position": "absolute",
-            "display": "table-cell",
-            "left": "47vw",
-            "top": "50vh",
+            "left": "50%",
+            "top": "50%",
+            "transform": "translate(-50%, -50%)",
         })
 
         this.helper.createChild(spinner,op.value);

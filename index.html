@@ -36,20 +36,21 @@
 
     // Start curtain as soon as DOM is parsed (so it appears before page content shows)
     document.addEventListener('DOMContentLoaded', function () {
-        // new CurtainFactory({
-        //     url: 'fragments/temp2.html',
-        //     content: '#content',
-        //     id: '#loading',
-        //     time: 3000,
-        //     completed: () => setDisplayNav('visible')
-        // });
+        new CurtainFactory({
+            url: 'fragments/temp2.html',
+            content: '.screen-back',
+            id: '#loading',
+            time: 3000,
+            completed: () => setDisplayNav('visible')
+        });
 
+        // Steps to implement:
         // init controller
         // append page with index negative and opacity 0
         // init curtain
         // action curtain
         // when curtain run haftway, transition page to opacity 1 and index 0
-        
+
     });
 </script>
 <body>
@@ -59,11 +60,10 @@
             <div data-nav="1" class="tag"><i class="fas fa-bookmark"></i></div>
         </nav>
     </div> -->
-
-    <div id="loading"></div>
-    <section id="content"  data-style="2">
-        <div class="welcome-panel">
-            <h1>Welcome !</h1>
+    
+    <section id="content" data-style="2">
+        <div class="screen-front">
+            <h1>Welcome!</h1>
         </div>
     </section>
 </body>
@@ -75,7 +75,5 @@
 
 <!-- App script (kept deferred) -->
 <script defer src="./js/script.js?ver=11"></script>
-
-</html>
 
 </html>

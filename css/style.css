@@ -13,7 +13,7 @@ nav .tag.active svg{
   color:red;
 }
 
-.welcome-panel{
+.screen-front{
     display: table;
     width: 100vw;
     height: 100vh;
@@ -21,7 +21,7 @@ nav .tag.active svg{
     background-color: white;
     
 }
-.welcome-panel h1{
+.screen-front h1{
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -801,4 +801,42 @@ nav .tag.active svg{
       transform: scale(0.9);
     }
   }
+
+  /*-- performance mobile --*/
+  @media (max-width: 768px) {
+    .screen-front h1{
+      font-size: 3rem;
+    }
+    .screen-front{
+      text-align: center;
+    }
+    section .screen-front{
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /*--- preformance ---*/
+  /* .screen-front{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    animation: Animation5 2s ease forwards;
+  }
+  .screen-back{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    opacity: 0;
+    animation: Animation6 2s ease forwards;
+    animation-delay: 0.5s;
+  } */
+
   
