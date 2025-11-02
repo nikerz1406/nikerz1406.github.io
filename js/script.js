@@ -1,17 +1,7 @@
 $(document).ready(function(){
     
-    function setDisplayNav(mode = 'hidden'){
-        // $('nav').css({
-        //     "visibility":mode
-        // })
-    }
+    // Curtain initialization has been moved to the <head> of index.html to start
+    // the curtain as early as possible (before page content displays).
 
-    (new CurtainFactory({
-        url:'fragments/temp2.html',
-        content:"#content",
-        id:"#loading",
-        time:3000,
-        completed: ()=> setDisplayNav("visible") // pass function instead of calling it now
-    }));
 
 })

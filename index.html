@@ -21,6 +21,37 @@
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
+<!-- early scripts for curtain (load jQuery and curtain modules so curtain can show before main rendering) -->
+<!-- Load jQuery from CDN; if it fails (SRI mismatch or network), fall back to local copy -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>window.jQuery || document.write('\x3Cscript src="BootstrapFontawesome/jquery/jquery.js">\x3C/script>');</script>
+<script src="./js/helper.js"></script>
+<script src="./js/curtain.js"></script>
+<script>
+    // minimal nav display helper used as CurtainFactory completed callback
+    function setDisplayNav(mode = 'visible') {
+        var nav = document.querySelector('nav');
+        if (nav) nav.style.visibility = mode;
+    }
+
+    // Start curtain as soon as DOM is parsed (so it appears before page content shows)
+    document.addEventListener('DOMContentLoaded', function () {
+        // new CurtainFactory({
+        //     url: 'fragments/temp2.html',
+        //     content: '#content',
+        //     id: '#loading',
+        //     time: 3000,
+        //     completed: () => setDisplayNav('visible')
+        // });
+
+        // init controller
+        // append page with index negative and opacity 0
+        // init curtain
+        // action curtain
+        // when curtain run haftway, transition page to opacity 1 and index 0
+        
+    });
+</script>
 <body>
     <!-- <div class="container">
         <nav class="row">
@@ -36,14 +67,15 @@
         </div>
     </section>
 </body>
-<script defer src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<!-- Load non-blocking UI/third-party scripts -->
 <script defer src="BootstrapFontawesome/fontawesome-free-5.9.0-web/js/all.min.js"></script>
-<script defer src="BootstrapFontawesome/jquery/jquery.js"></script>
 <script defer src="BootstrapFontawesome/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 <script defer src="BootstrapFontawesome/jquery/js.cookie.js"></script>
 <script defer src="BootstrapFontawesome/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-<script defer src="./js/helper.js"></script>
-<script defer src="./js/curtain.js"></script>
+
+<!-- App script (kept deferred) -->
 <script defer src="./js/script.js?ver=11"></script>
+
+</html>
 
 </html>
